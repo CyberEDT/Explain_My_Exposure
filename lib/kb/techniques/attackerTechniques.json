@@ -1,0 +1,94 @@
+{
+  "T1046": {
+    "name": "Network Service Scanning",
+    "description": "Adversaries scan networks to map systems and discover open ports and services."
+  },
+  "T1021.001": {
+    "name": "Remote Services: Remote Desktop Protocol",
+    "description": "Adversaries log in interactively to remote systems using RDP to execute programs."
+  },
+  "T1021.002": {
+    "name": "Remote Services: SMB/Windows Admin Shares",
+    "description": "Adversaries use Windows SMB shares to write files, run programs, and move laterally."
+  },
+  "T1021.004": {
+    "name": "Remote Services: SSH",
+    "description": "Adversaries connect to remote terminals using SSH to operate target servers."
+  },
+  "T1021.005": {
+    "name": "Remote Services: VNC",
+    "description": "Adversaries use VNC graphical sharing systems to hijack mouse and keyboard control."
+  },
+  "T1021.006": {
+    "name": "Remote Services: Windows Remote Management",
+    "description": "Adversaries use WinRM (PowerShell Remoting) to run remote scripts on targets."
+  },
+  "T1110": {
+    "name": "Brute Force",
+    "description": "Adversaries run dictionary attacks to guess passwords and access systems."
+  },
+  "T1110.003": {
+    "name": "Password Spraying",
+    "description": "Adversaries test a single common password against many accounts to bypass locking rules."
+  },
+  "T1190": {
+    "name": "Exploit Public-Facing Application",
+    "description": "Adversaries exploit bugs in public web applications or protocols to execute code."
+  },
+  "T1558.003": {
+    "name": "Steal or Forge Kerberos Tickets: Kerberoasting",
+    "description": "Adversaries request Service Principal Name tickets to crack account passwords offline."
+  },
+  "T1558.004": {
+    "name": "Steal or Forge Kerberos Tickets: AS-REP Roasting",
+    "description": "Adversaries request tickets for accounts with pre-auth disabled to crack passwords offline."
+  },
+  "T1040": {
+    "name": "Network Sniffing",
+    "description": "Adversaries sniff traffic (like Telnet or FTP sessions) to capture cleartext credentials."
+  },
+  "T1590.005": {
+    "name": "Search Technical Databases: DNS/Domain Records",
+    "description": "Adversaries query DNS zone transfers (AXFR) to map active subdomains and host layouts."
+  },
+  "T1087.002": {
+    "name": "Account Discovery: Domain Account",
+    "description": "Adversaries query LDAP directory databases to list Active Directory user profiles."
+  },
+  "T1069.002": {
+    "name": "Permission Groups Discovery: Domain Groups",
+    "description": "Adversaries query LDAP groups to identify domain administrators and target groups."
+  },
+  "T1083": {
+    "name": "File and Directory Discovery",
+    "description": "Adversaries explore files and directory paths to look for configurations and database backups."
+  },
+  "T1059": {
+    "name": "Command and Scripting Interpreter",
+    "description": "Adversaries use command-line interpreter shells (cmd, bash) to run host commands."
+  },
+  "T1059.001": {
+    "name": "Command and Scripting Interpreter: PowerShell",
+    "description": "Adversaries execute PowerShell scripts in-memory to execute post-exploitation tools."
+  },
+  "T1078": {
+    "name": "Valid Accounts",
+    "description": "Adversaries log in using stolen, brute-forced, or default credentials."
+  },
+  "T1043": {
+    "name": "Commonly Used Port",
+    "description": "Adversaries use standard ports (like 443) to hide outbound C2 communication traffic."
+  },
+  "T1505.003": {
+    "name": "Server Software Component: Web Shell",
+    "description": "Adversaries upload script files inside web folders to maintain persistent terminal access."
+  },
+  "T1598": {
+    "name": "Phishing for Information",
+    "description": "Adversaries route mail relays to send phishing messages and harvest credentials."
+  },
+  "T1586": {
+    "name": "Compromise Accounts",
+    "description": "Adversaries exploit unhardened relays to capture or spoof valid user accounts."
+  }
+}

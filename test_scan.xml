@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<nmaprun scanner="nmap" args="nmap -sV -p- -T4 -oX test_scan.xml 10.0.0.0/24" start="1695420000" startstr="Wed Sep 20 12:00:00 2026" version="7.94" xmloutputversion="1.05">
+  <scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
+  <verbose level="0"/>
+  <debugging level="0"/>
+
+  <!-- Host 1: Domain Controller -->
+  <host starttime="1695420000" endtime="1695420100">
+    <status state="up" reason="arp-response" reason_ttl="0"/>
+    <address addr="10.0.0.15" addrtype="ipv4"/>
+    <hostnames>
+      <hostname name="CORP-DC01.local" type="PTR"/>
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="65530">
+        <extrareasons reason="resets" count="65530"/>
+      </extraports>
+      <port protocol="tcp" portid="53">
+        <state state="open" reason="syn-ack" reason_ttl="128"/>
+        <service name="domain" method="table" conf="3"/>
+      </port>
+      <port protocol="tcp" portid="88">
+        <state state="open" reason="syn-ack" reason_ttl="128"/>
+        <service name="kerberos-sec" method="table" conf="3"/>
+      </port>
+      <port protocol="tcp" portid="389">
+        <state state="open" reason="syn-ack" reason_ttl="128"/>
+        <service name="ldap" method="table" conf="3"/>
+      </port>
+      <port protocol="tcp" portid="445">
+        <state state="open" reason="syn-ack" reason_ttl="128"/>
+        <service name="microsoft-ds" method="table" conf="3"/>
+      </port>
+      <port protocol="tcp" portid="3389">
+        <state state="open" reason="syn-ack" reason_ttl="128"/>
+        <service name="ms-wbt-server" method="table" conf="3"/>
+      </port>
+    </ports>
+    <os>
+      <osmatch name="Microsoft Windows Server 2019" accuracy="95" line="75000"/>
+    </os>
+  </host>
+
+  <!-- Host 2: Web Server -->
+  <host starttime="1695420000" endtime="1695420100">
+    <status state="up" reason="arp-response" reason_ttl="0"/>
+    <address addr="10.0.0.42" addrtype="ipv4"/>
+    <hostnames>
+      <hostname name="prod-web-01" type="PTR"/>
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="65532">
+        <extrareasons reason="resets" count="65532"/>
+      </extraports>
+      <port protocol="tcp" portid="22">
+        <state state="open" reason="syn-ack" reason_ttl="64"/>
+        <service name="ssh" method="table" conf="3"/>
+      </port>
+      <port protocol="tcp" portid="80">
+        <state state="open" reason="syn-ack" reason_ttl="64"/>
+        <service name="http" method="table" conf="3"/>
+      </port>
+      <port protocol="tcp" portid="443">
+        <state state="open" reason="syn-ack" reason_ttl="64"/>
+        <service name="https" method="table" conf="3"/>
+      </port>
+    </ports>
+    <os>
+      <osmatch name="Linux 5.4" accuracy="98" line="10200"/>
+    </os>
+  </host>
+
+  <!-- Host 3: Legacy Database/Storage -->
+  <host starttime="1695420000" endtime="1695420100">
+    <status state="up" reason="arp-response" reason_ttl="0"/>
+    <address addr="10.0.0.100" addrtype="ipv4"/>
+    <hostnames>
+      <hostname name="backup-srv-old" type="PTR"/>
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="65533">
+        <extrareasons reason="resets" count="65533"/>
+      </extraports>
+      <port protocol="tcp" portid="21">
+        <state state="open" reason="syn-ack" reason_ttl="64"/>
+        <service name="ftp" method="table" conf="3"/>
+      </port>
+      <port protocol="tcp" portid="3306">
+        <state state="open" reason="syn-ack" reason_ttl="64"/>
+        <service name="mysql" method="table" conf="3"/>
+      </port>
+    </ports>
+  </host>
+
+  <runstats>
+    <finished time="1695420100" timestr="Wed Sep 20 12:01:40 2026" elapsed="100.00" summary="Nmap done at Wed Sep 20 12:01:40 2026; 256 IP addresses (3 hosts up) scanned in 100.00 seconds" exit="success"/>
+    <hosts up="3" down="253" total="256"/>
+  </runstats>
+</nmaprun>

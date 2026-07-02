@@ -1,0 +1,18 @@
+:root {
+  --brand-gold: #D4AF37;
+  --brand-white: #fafafa;
+  --brand-lightgrey: #a1a1aa;
+  --brand-workspacebg: #030303;
+  --brand-darkgrey: #18181b;
+  --brand-black: #030303;
+  --brand-border: #27272a;
+  
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-sans: 'Space Grotesk', 'Outfit', 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--brand-black);
+  color: var(--brand-white);
+  font-family: var(--font-mono); /* Threat Lens uses monospace as the default body text font */
+}

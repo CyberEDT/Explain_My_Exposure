@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #f59e0b;
+  --color-danger: #ef4444;
+  --color-success: #10b981;
+  --color-background: #030303;
+  --color-foreground: #fafafa;
+  --color-card: #0a0a0a;
+  --color-border: #262626;
+  --color-muted-foreground: #888888;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --animate-ticker: ticker 30s linear infinite;
+  --animate-pulse-dot: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(1.5); }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased font-mono;
+  }
+}
