@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="col-span-1">
             <div className="flex items-center gap-3 mb-6">
               <img src="/logo.png" alt="EME Hacker Logo" className="w-8 h-8 object-contain" />
-              <span className="font-bold tracking-widest text-xl text-foreground">EME</span>
+              <span className="font-display font-bold tracking-widest text-3xl text-foreground">EME</span>
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed max-w-[280px]">
               Explain My Exposure. Sister product to <a href="https://explainthehacker.cyberedt.com/" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">Explain The Hacker</a>. Built by <a href="http://www.cyberedt.com" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">CyberEDT</a>.
@@ -44,6 +44,7 @@ export default function Footer() {
           <div className="col-span-1">
             <h4 className="text-gold text-xs font-bold tracking-widest mb-6">ECOSYSTEM</h4>
             <ul className="space-y-4 text-xs text-muted-foreground">
+              <li><a href="https://github.com/CyberEDT/Explain_My_Exposure" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors flex items-center gap-2">// Source on GitHub</a></li>
               <li><a href="https://explainthehacker.cyberedt.com/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">// Explain The Hacker</a></li>
               <li><a href="http://www.cyberedt.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">// CyberEDT</a></li>
               <li><Link to="/privacy" className="hover:text-foreground transition-colors">// Privacy</Link></li>

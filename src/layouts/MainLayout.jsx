@@ -4,7 +4,7 @@ import { useExposure } from '../contexts/ExposureContext';
 import Footer from '../components/Footer';
 import MobileTabBar from '../components/common/MobileTabBar';
 import useDevice from '../hooks/useDevice';
-import { Menu, X, Activity, Cpu, Grid, Shield, Database, FileText } from 'lucide-react';
+import { Menu, X, Activity, Cpu, Grid, Shield, Database, FileText, Code } from 'lucide-react';
 
 const NAV_ITEMS = [
   { path: '/scanner', label: 'ingest', icon: Activity },
@@ -64,6 +64,9 @@ export default function MainLayout({ children }) {
             <a href="http://www.cyberedt.com" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-gold/80 transition-colors font-bold ml-4 border-l border-border pl-6">
               CYBEREDT
             </a>
+            <a href="https://github.com/CyberEDT/Explain_My_Exposure" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-gold transition-colors ml-4" title="View Source on GitHub">
+              <Code size={14} />
+            </a>
           </nav>
 
           {/* Mobile Toggle Button (Hidden if using Bottom Tabs) */}
@@ -103,8 +106,12 @@ export default function MainLayout({ children }) {
                 })
               )}
               <div className="w-full h-px bg-border my-2"></div>
-              <a href="http://www.cyberedt.com" target="_blank" rel="noopener noreferrer" className="text-gold font-bold flex items-center gap-3">
+              <a href="http://www.cyberedt.com" target="_blank" rel="noopener noreferrer" className="text-gold font-bold flex items-center gap-2 border-t border-border pt-4 mt-2">
                 CYBEREDT
+              </a>
+              <a href="https://github.com/CyberEDT/Explain_My_Exposure" target="_blank" rel="noopener noreferrer" className="text-muted-foreground flex items-center gap-2">
+                <Code size={14} />
+                // GITHUB REPO
               </a>
             </nav>
           </div>

@@ -9,7 +9,8 @@
   --color-card: #0a0a0a;
   --color-border: #262626;
   --color-muted-foreground: #888888;
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --animate-ticker: ticker 30s linear infinite;
   --animate-pulse-dot: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -27,6 +28,6 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground antialiased font-mono;
+    @apply bg-background text-foreground antialiased font-body;
   }
 }
