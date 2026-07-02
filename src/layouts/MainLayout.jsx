@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { useExposure } from '../contexts/ExposureContext';
 import Footer from '../components/Footer';
+import MobileTabBar from '../components/common/MobileTabBar';
+import useDevice from '../hooks/useDevice';
 import { Menu, X, Activity, Cpu, Grid, Shield, Database, FileText } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -17,8 +19,12 @@ export default function MainLayout({ children }) {
   const { scanResult } = useExposure();
   const location = useLocation();
   const isLandingPage = location.pathname === '/';
+  const { isMobile, isIOS } = useDevice();
   
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Determine if we should show the mobile bottom tab bar
+  const showMobileTabs = isMobile && !isLandingPage;
 
   return (
     <div className="relative min-h-screen overflow-x-hidden font-mono bg-background text-foreground selection:bg-gold/30 selection:text-white">
@@ -60,17 +66,19 @@ export default function MainLayout({ children }) {
             </a>
           </nav>
 
-          {/* Mobile Toggle Button */}
-          <button 
-            className="md:hidden text-foreground hover:text-gold transition-colors z-50"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          {/* Mobile Toggle Button (Hidden if using Bottom Tabs) */}
+          {!showMobileTabs && (
+            <button 
+              className="md:hidden text-foreground hover:text-gold transition-colors z-50"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          )}
         </div>
 
         {/* Mobile Dropdown Overlay */}
-        {mobileMenuOpen && (
+        {mobileMenuOpen && !showMobileTabs && (
           <div className="md:hidden absolute top-14 left-0 w-full bg-background/95 border-b border-border backdrop-blur-xl animate-in slide-in-from-top-2 duration-200 z-40">
             <nav className="flex flex-col p-6 gap-6 text-[11px] uppercase tracking-[0.2em]">
               {isLandingPage ? (
@@ -171,13 +179,15 @@ export default function MainLayout({ children }) {
         </div>
       </div>
 
-      {/* Main Container Content */}
-      <main className="mx-auto max-w-[1600px] bg-background overflow-hidden min-h-screen">
+      {/* Main Content Area */}
+      <main className={`mx-auto max-w-[1600px] bg-background overflow-hidden relative z-10 min-h-[calc(100vh-3.5rem)] flex flex-col ${showMobileTabs ? 'pb-24' : ''} ${isIOS && showMobileTabs ? 'pb-28' : ''}`}>
         {children}
       </main>
 
       <Footer />
+      
+      {/* Mobile Sticky Bottom Navigation */}
+      {showMobileTabs && <MobileTabBar />}
     </div>
   );
 }
-

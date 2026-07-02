@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+.env.*
+.gemini/
+test_scan.xml
+*.log
+.DS_Store
