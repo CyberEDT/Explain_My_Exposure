@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import SeoMeta from '../components/seo/SeoMeta';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ShieldAlert, ShieldCheck, Activity, Terminal, Crosshair, Network, FileText, Lock, AlertTriangle, ArrowRight, Layers } from 'lucide-react';
@@ -26,7 +27,8 @@ export default function ReportPage() {
   const COLORS = ['#ef4444', '#f59e0b', '#3b82f6'];
 
   return (
-    <div className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-danger selection:text-white">
+    <main className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-danger selection:text-white">
+      <SeoMeta title="Report" />
       
       {/* 1. Hero / Header Section */}
       <section className="border-b border-border bg-[#050505]">
@@ -372,6 +374,6 @@ export default function ReportPage() {
          </div>
       </section>
 
-    </div>
+    </main>
   );
 }

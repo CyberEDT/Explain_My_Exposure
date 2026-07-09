@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SeoMeta from '../components/seo/SeoMeta';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Network, Search, Filter, ShieldAlert, Shield, ShieldCheck, ArrowRight, Activity, Terminal, Target } from 'lucide-react';
@@ -82,7 +83,8 @@ export default function MitrePage() {
   const activeTechData = techniques.find(t => t.id === activeTechnique) || techniques[0];
 
   return (
-    <div className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+    <main className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+      <SeoMeta title="Mitre" />
       
       {/* 1. Hero Section */}
       <section className="relative overflow-hidden border-b border-border min-h-[90vh] flex flex-col justify-center">
@@ -352,6 +354,6 @@ export default function MitrePage() {
          </div>
       </section>
       
-    </div>
+    </main>
   );
 }

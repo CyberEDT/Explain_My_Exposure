@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SeoMeta from '../components/seo/SeoMeta';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Terminal, Database, Cpu, Target, Crosshair, Link as LinkIcon, BarChart, FileText, PieChart, ArrowRight, Activity, Shield, Network } from 'lucide-react';
@@ -116,7 +117,8 @@ export default function EnginePage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+    <main className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+      <SeoMeta title="Engine" />
       
       {/* 1. Hero Section */}
       <section className="relative overflow-hidden border-b border-border min-h-[90vh] flex flex-col justify-center">
@@ -373,6 +375,6 @@ export default function EnginePage() {
          </div>
       </section>
       
-    </div>
+    </main>
   );
 }

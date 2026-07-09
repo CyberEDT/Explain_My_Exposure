@@ -20,36 +20,42 @@ export default function Footer() {
 
           {/* Column 2: PRODUCT */}
           <div className="col-span-1">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-gold">PRODUCT</div>
-            <ul className="mt-3 space-y-2 text-muted-foreground">
-              <li><Link to="/engine" className="hover:text-foreground transition-colors">// Engine</Link></li>
-              <li><Link to="/mitre" className="hover:text-foreground transition-colors">// MITRE Grid</Link></li>
-              <li><Link to="/scanner" className="hover:text-foreground transition-colors">// Discover</Link></li>
-              <li><Link to="/report" className="hover:text-foreground transition-colors">// Report</Link></li>
-            </ul>
+            <h2 className="text-[10px] uppercase tracking-[0.2em] text-gold">PRODUCT</h2>
+            <nav aria-label="Product Links">
+              <ul className="mt-3 space-y-2 text-muted-foreground">
+                <li><Link to="/engine" className="hover:text-foreground transition-colors">// Engine</Link></li>
+                <li><Link to="/mitre" className="hover:text-foreground transition-colors">// MITRE Grid</Link></li>
+                <li><Link to="/scanner" className="hover:text-foreground transition-colors">// Discover</Link></li>
+                <li><Link to="/report" className="hover:text-foreground transition-colors">// Report</Link></li>
+              </ul>
+            </nav>
           </div>
 
           {/* Column 3: DOCS */}
           <div className="col-span-1">
-            <h4 className="text-gold text-xs font-bold tracking-widest mb-6">DOCS</h4>
-            <ul className="space-y-4 text-xs text-muted-foreground">
-              <li><Link to="/exposure-model" className="hover:text-foreground transition-colors">// Exposure Model</Link></li>
-              <li><Link to="/rules" className="hover:text-foreground transition-colors">// Host Rules</Link></li>
-              <li><Link to="/kb" className="hover:text-foreground transition-colors">// Knowledge Base</Link></li>
-              <li><Link to="/changelog" className="hover:text-foreground transition-colors">// Changelog</Link></li>
-            </ul>
+            <h2 className="text-gold text-xs font-bold tracking-widest mb-6">DOCS</h2>
+            <nav aria-label="Documentation Links">
+              <ul className="space-y-4 text-xs text-muted-foreground">
+                <li><Link to="/exposure-model" className="hover:text-foreground transition-colors">// Exposure Model</Link></li>
+                <li><Link to="/rules" className="hover:text-foreground transition-colors">// Host Rules</Link></li>
+                <li><Link to="/kb" className="hover:text-foreground transition-colors">// Knowledge Base</Link></li>
+                <li><Link to="/changelog" className="hover:text-foreground transition-colors">// Changelog</Link></li>
+              </ul>
+            </nav>
           </div>
 
           {/* Column 4: ECOSYSTEM */}
           <div className="col-span-1">
-            <h4 className="text-gold text-xs font-bold tracking-widest mb-6">ECOSYSTEM</h4>
-            <ul className="space-y-4 text-xs text-muted-foreground">
-              <li><a href="https://github.com/CyberEDT/Explain_My_Exposure" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors flex items-center gap-2">// Source on GitHub</a></li>
-              <li><a href="https://explainthehacker.cyberedt.com/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">// Explain The Hacker</a></li>
-              <li><a href="http://www.cyberedt.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">// CyberEDT</a></li>
-              <li><Link to="/privacy" className="hover:text-foreground transition-colors">// Privacy</Link></li>
-              <li><Link to="/status" className="hover:text-foreground transition-colors">// Status</Link></li>
-            </ul>
+            <h2 className="text-gold text-xs font-bold tracking-widest mb-6">ECOSYSTEM</h2>
+            <nav aria-label="Ecosystem Links">
+              <ul className="space-y-4 text-xs text-muted-foreground">
+                <li><a href="https://github.com/CyberEDT/Explain_My_Exposure" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors flex items-center gap-2">// Source on GitHub</a></li>
+                <li><a href="https://explainthehacker.cyberedt.com/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">// Explain The Hacker</a></li>
+                <li><a href="http://www.cyberedt.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">// CyberEDT</a></li>
+                <li><Link to="/privacy" className="hover:text-foreground transition-colors">// Privacy</Link></li>
+                <li><Link to="/status" className="hover:text-foreground transition-colors">// Status</Link></li>
+              </ul>
+            </nav>
           </div>
 
         </div>

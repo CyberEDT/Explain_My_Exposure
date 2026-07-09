@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from '../common/Card';
-import { useExposure } from '../../contexts/ExposureContext';
+import { useExposureStore } from '../../store/exposureStore';
 
 export default function AttackPathVisualizer() {
-  const { scanResult } = useExposure();
+  const { scanResult } = useExposureStore();
   const paths = scanResult?.paths || [];
 
   if (paths.length === 0) {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SeoMeta from '../components/seo/SeoMeta';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Network, Search, Filter, ShieldAlert, Cpu, ArrowRight, Activity, Terminal, Database, Server, Laptop, HelpCircle } from 'lucide-react';
@@ -84,7 +85,8 @@ export default function RulesPage() {
   );
 
   return (
-    <div className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black overflow-hidden">
+    <main className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black overflow-hidden">
+      <SeoMeta title="Rules" />
       
       {/* 1. Hero / Header Section */}
       <section className="relative overflow-hidden border-b border-border min-h-[90vh] flex flex-col justify-center">
@@ -386,6 +388,6 @@ export default function RulesPage() {
          </div>
       </section>
       
-    </div>
+    </main>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SeoMeta from '../components/seo/SeoMeta';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Search, Server, ShieldAlert, Crosshair, Network, FileText, Lock, AlertTriangle, ArrowRight, Activity, Terminal } from 'lucide-react';
@@ -184,7 +185,8 @@ export default function KnowledgeBasePage() {
   const activeData = services.find(s => s.id === activeServiceId) || services[0];
 
   return (
-    <div className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+    <main className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+      <SeoMeta title="Knowledge Base" />
       
       {/* 1. Hero / Header Section */}
       <section className="relative overflow-hidden border-b border-border min-h-[50vh] flex flex-col justify-center">
@@ -401,7 +403,7 @@ export default function KnowledgeBasePage() {
          </div>
       </section>
 
-    </div>
+    </main>
   );
 }
 

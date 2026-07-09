@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SeoMeta from '../components/seo/SeoMeta';
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono">
+    <main className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono">
+      <SeoMeta 
+        title="Explain My Exposure" 
+        description="Explain My Exposure (EME) by CyberEDT translates raw Nmap output into a threat-actor's reconnaissance brief. Exposure risk scoring and MITRE ATT&CK alignment." 
+      />
       {/* Hero Section */}
       <section id="top" className="relative overflow-hidden border-b border-border">
         {/* Decorative Grid BG */}
@@ -47,10 +52,11 @@ export default function LandingPage() {
             <div className="flex flex-col items-start gap-3 text-[11px]">
               <Link
                 to="/scanner"
+                aria-label="Initialize Scan - Open Dashboard"
                 className="group inline-flex items-center gap-3 border border-gold bg-gold px-5 py-3 font-bold uppercase tracking-[0.2em] text-primary-foreground transition-all hover:glow-gold"
               >
                 <span>INITIALIZE_SCAN</span>
-                <span className="transition-transform group-hover:translate-x-1">→</span>
+                <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
               </Link>
               <span className="inline-flex items-center gap-2 border border-border px-5 py-3 uppercase tracking-[0.2em] text-muted-foreground bg-card">
                 <span>local-first · zero telemetry</span>
@@ -248,8 +254,11 @@ export default function LandingPage() {
                 </div>
               </motion.div>
               <div className="mt-8">
-                <button className="inline-flex items-center border border-border px-4 py-2 font-mono text-[10px] tracking-widest text-muted-foreground hover:text-foreground hover:border-muted-foreground transition-colors uppercase">
-                  DOWNLOAD_MATRIX.CSV &darr;
+                <button 
+                  aria-label="Download Tactics Matrix CSV"
+                  className="inline-flex items-center border border-border px-4 py-2 font-mono text-[10px] tracking-widest text-muted-foreground hover:text-foreground hover:border-muted-foreground transition-colors uppercase"
+                >
+                  DOWNLOAD_MATRIX.CSV <span aria-hidden="true">&darr;</span>
                 </button>
               </div>
             </div>
@@ -331,14 +340,23 @@ export default function LandingPage() {
               
               <div className="text-[10px] text-muted-foreground tracking-widest uppercase mb-6">EXPORT OPTIONS</div>
               <div className="space-y-2">
-                <button className="w-full bg-gold text-black font-bold py-3 text-xs tracking-widest uppercase flex justify-center items-center gap-2">
-                  <span>↓</span> DOWNLOAD .MD
+                <button 
+                  aria-label="Download Markdown Report"
+                  className="w-full bg-gold text-black font-bold py-3 text-xs tracking-widest uppercase flex justify-center items-center gap-2"
+                >
+                  <span aria-hidden="true">↓</span> DOWNLOAD .MD
                 </button>
-                <button className="w-full border border-border text-muted-foreground hover:text-foreground py-3 text-xs tracking-widest uppercase flex justify-center items-center gap-2">
-                  <span>📄</span> EXPORT .PDF
+                <button 
+                  aria-label="Export PDF Report"
+                  className="w-full border border-border text-muted-foreground hover:text-foreground py-3 text-xs tracking-widest uppercase flex justify-center items-center gap-2"
+                >
+                  <span aria-hidden="true">📄</span> EXPORT .PDF
                 </button>
-                <button className="w-full border border-border text-muted-foreground hover:text-foreground py-3 text-xs tracking-widest uppercase flex justify-center items-center gap-2">
-                  <span>⎘</span> COPY JSON
+                <button 
+                  aria-label="Copy JSON Data"
+                  className="w-full border border-border text-muted-foreground hover:text-foreground py-3 text-xs tracking-widest uppercase flex justify-center items-center gap-2"
+                >
+                  <span aria-hidden="true">⎘</span> COPY JSON
                 </button>
               </div>
             </div>
@@ -439,9 +457,10 @@ export default function LandingPage() {
           <div className="mt-12 text-center">
             <Link
               to="/scanner"
+              aria-label="Initialize Scan - Open Dashboard"
               className="inline-flex items-center gap-3 border border-gold bg-gold px-8 py-4 font-bold uppercase tracking-[0.2em] text-primary-foreground transition-all hover:glow-gold"
             >
-              <span>INITIALIZE_SCAN →</span>
+              <span>INITIALIZE_SCAN <span aria-hidden="true">→</span></span>
             </Link>
             <p className="mt-4 text-[11px] text-muted-foreground">
               No account required. Runs in your browser. No data leaves the workstation.
@@ -450,6 +469,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-    </div>
+    </main>
   );
 }

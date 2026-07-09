@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SeoMeta from '../components/seo/SeoMeta';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Shield, Eye, Database, Unlock, Crosshair, Map, AlertTriangle, ArrowRight, Activity, Terminal, Cross, CheckCircle2 } from 'lucide-react';
@@ -20,7 +21,8 @@ export default function ExposureChainPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+    <main className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+      <SeoMeta title="Exposure Chain" />
       
       {/* 1. Hero Section */}
       <section className="relative overflow-hidden border-b border-border min-h-[90vh] flex flex-col justify-center">
@@ -529,6 +531,6 @@ export default function ExposureChainPage() {
         </div>
       </section>
 
-    </div>
+    </main>
   );
 }

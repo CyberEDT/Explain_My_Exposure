@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
-import { useExposure } from '../../contexts/ExposureContext';
+import { useExposureStore } from '../../store/exposureStore';
+import { Upload } from 'lucide-react';
 
 export default function DragAndDrop() {
   const fileInputRef = useRef();
-  const { triggerAnalysis, loading } = useExposure();
+  const { triggerAnalysis, loading } = useExposureStore();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];

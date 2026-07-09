@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
-import LandingPage from '../pages/LandingPage';
-import DashboardPage from '../pages/DashboardPage';
-import PrivacyPage from '../pages/PrivacyPage';
-import ExposureChainPage from '../pages/ExposureChainPage';
-import EnginePage from '../pages/EnginePage';
-import MitrePage from '../pages/MitrePage';
-import ReportPage from '../pages/ReportPage';
-import RulesPage from '../pages/RulesPage';
-import KnowledgeBasePage from '../pages/KnowledgeBasePage';
-import ChangelogPage from '../pages/ChangelogPage';
-import StatusPage from '../pages/StatusPage';
+
+// Lazy loaded page components for Code Splitting (Improves LCP and Performance)
+const LandingPage = lazy(() => import('../pages/LandingPage'));
+const DashboardPage = lazy(() => import('../pages/DashboardPage'));
+const PrivacyPage = lazy(() => import('../pages/PrivacyPage'));
+const ExposureChainPage = lazy(() => import('../pages/ExposureChainPage'));
+const EnginePage = lazy(() => import('../pages/EnginePage'));
+const MitrePage = lazy(() => import('../pages/MitrePage'));
+const ReportPage = lazy(() => import('../pages/ReportPage'));
+const RulesPage = lazy(() => import('../pages/RulesPage'));
+const KnowledgeBasePage = lazy(() => import('../pages/KnowledgeBasePage'));
+const ChangelogPage = lazy(() => import('../pages/ChangelogPage'));
+const StatusPage = lazy(() => import('../pages/StatusPage'));
+
+// A simple fallback component while chunk is loading
+const PageLoader = () => (
+  <div className="min-h-[80vh] flex items-center justify-center bg-[#030303]">
+    <div className="inline-flex items-center gap-2 border border-border bg-card px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-gold">
+      <span className="h-1.5 w-1.5 bg-gold animate-pulse-dot rounded-full"></span>
+      LOADING_MODULE...
+    </div>
+  </div>
+);
 
 export default function AppRoutes() {
   return (
-    <Routes>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
       {/* Root Landing Page */}
       <Route path="/" element={<MainLayout><LandingPage /></MainLayout>} />
       
@@ -55,5 +68,6 @@ export default function AppRoutes() {
       <Route path="/settings" element={<Navigate to="/scanner" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </Suspense>
   );
 }

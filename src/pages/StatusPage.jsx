@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import SeoMeta from '../components/seo/SeoMeta';
 import { motion } from 'framer-motion';
 import { Activity, Clock, CheckCircle2, AlertTriangle, AlertCircle, Info, Settings, Server, Map, BookOpen, LineChart as LineChartIcon, FileText, Database, Network } from 'lucide-react';
 import { BarChart, Bar, Cell, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
@@ -55,7 +56,8 @@ export default function StatusPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+    <main className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+      <SeoMeta title="Status" />
       
       {/* 1. Hero / Header Section */}
       <section className="bg-[#050505] border-b border-border py-16 md:py-24">
@@ -314,6 +316,6 @@ export default function StatusPage() {
          </div>
       </section>
 
-    </div>
+    </main>
   );
 }

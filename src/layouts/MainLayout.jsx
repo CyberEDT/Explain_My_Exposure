@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { useExposure } from '../contexts/ExposureContext';
+import { useExposureStore } from '../store/exposureStore';
 import Footer from '../components/Footer';
 import MobileTabBar from '../components/common/MobileTabBar';
 import useDevice from '../hooks/useDevice';
@@ -16,7 +16,7 @@ const NAV_ITEMS = [
 ];
 
 export default function MainLayout({ children }) {
-  const { scanResult } = useExposure();
+  const { scanResult } = useExposureStore();
   const location = useLocation();
   const isLandingPage = location.pathname === '/';
   const { isMobile, isIOS } = useDevice();
@@ -37,7 +37,7 @@ export default function MainLayout({ children }) {
           </Link>
           
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav aria-label="Primary Navigation" className="hidden items-center gap-8 md:flex">
             {isLandingPage ? (
               <Link to="/scanner" className="text-muted-foreground hover:text-gold transition-colors flex items-center gap-1.5">
                 <Activity size={12} />
@@ -83,7 +83,7 @@ export default function MainLayout({ children }) {
         {/* Mobile Dropdown Overlay */}
         {mobileMenuOpen && !showMobileTabs && (
           <div className="md:hidden absolute top-14 left-0 w-full bg-background/95 border-b border-border backdrop-blur-xl animate-in slide-in-from-top-2 duration-200 z-40">
-            <nav className="flex flex-col p-6 gap-6 text-[11px] uppercase tracking-[0.2em]">
+            <nav aria-label="Mobile Navigation" className="flex flex-col p-6 gap-6 text-[11px] uppercase tracking-[0.2em]">
               {isLandingPage ? (
                 <Link to="/scanner" className="text-muted-foreground hover:text-gold flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
                   <Activity size={14} /> // scanner

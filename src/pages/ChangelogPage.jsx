@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import SeoMeta from '../components/seo/SeoMeta';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Terminal, ArrowRight, GitCommit, ChevronRight, CheckCircle2, Clock, Map, BookOpen, Settings } from 'lucide-react';
@@ -54,7 +55,8 @@ export default function ChangelogPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+    <main className="relative min-h-screen bg-[#030303] text-[#fafafa] font-mono selection:bg-gold selection:text-black">
+      <SeoMeta title="Changelog" />
       
       {/* 1. Hero / Header Section */}
       <section className="relative overflow-hidden border-b border-border min-h-[50vh] flex flex-col justify-center">
@@ -243,6 +245,6 @@ export default function ChangelogPage() {
          </div>
       </section>
 
-    </div>
+    </main>
   );
 }

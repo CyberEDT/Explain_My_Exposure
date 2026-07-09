@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import SeoMeta from '../components/seo/SeoMeta';
 import { ShieldAlert } from 'lucide-react';
 
 export default function PrivacyPage() {
@@ -8,7 +9,8 @@ export default function PrivacyPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background font-mono text-[#fafafa] py-16 px-6">
+    <main className="min-h-screen bg-background font-mono text-[#fafafa] py-16 px-6">
+      <SeoMeta title="Privacy" />
       <div className="max-w-[800px] mx-auto space-y-12">
         
         {/* Header */}
@@ -94,6 +96,6 @@ export default function PrivacyPage() {
 
         </div>
       </div>
-    </div>
+    </main>
   );
 }
