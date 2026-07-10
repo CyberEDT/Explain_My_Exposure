@@ -29,6 +29,7 @@ import {
 import { MOCK_PRELOADED_DATA } from '../constants/mockData';
 import { handleDownloadMd } from '../services/reportGenerator';
 import SeoMeta from '../components/seo/SeoMeta';
+import CILExportButton from '../components/CILExportButton';
 
 export default function DashboardPage() {
   const { loading, error, scanResult, triggerAnalysis, clearScan, storagePermission, handleSetStoragePermission } = useExposureStore();
@@ -110,8 +111,24 @@ export default function DashboardPage() {
   // Handle file drop/upload
   const handleFile = (file) => {
     if (!file) return;
-    setUploadProgress(10);
+
+    // 1. File Type Validation
+    const validExtensions = ['xml', 'txt', 'log', 'json'];
     const fileExtension = file.name.split('.').pop().toLowerCase();
+    
+    if (!validExtensions.includes(fileExtension)) {
+      useExposureStore.getState().setError(`Invalid file type (.${fileExtension}). Only .xml, .txt, .log, and .json are supported.`);
+      return;
+    }
+
+    // 2. File Size Validation (Max 50MB)
+    const MAX_SIZE = 50 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      useExposureStore.getState().setError(`File is too large (${(file.size / 1024 / 1024).toFixed(2)} MB). Max limit is 50 MB.`);
+      return;
+    }
+
+    setUploadProgress(10);
     const reader = new FileReader();
     
     // Simulate upload progress
@@ -337,6 +354,13 @@ OS details: Windows Server 2019`, 'text', scanLevel)} className="text-xs text-mu
               </div>
             </div>
           </div>
+
+          {/* CyberEDT Intelligence Layer Unified Banner */}
+          {!isDemo && (
+            <div className="mx-auto max-w-[1600px] px-6 mt-4">
+              <CILExportButton scanResult={scanResult} />
+            </div>
+          )}
 
           {activeTab === 'REPORT' ? (
             <IntelligenceReportView activeResult={activeResult} hosts={hosts} scanLevel={scanLevel} />

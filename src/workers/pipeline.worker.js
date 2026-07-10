@@ -4,13 +4,17 @@ import { mapToMitre } from '../../lib/engines/mitre/mapper.js';
 import { suggestPaths } from '../../lib/engines/exposure/pathSuggester.js';
 import { generateNarrative } from '../../lib/engines/narrative/engine.js';
 import { IntelligencePipeline } from '../../lib/engines/pipeline/index.js';
+import { nmapDataSchema } from '../schemas/nmapSchema.js';
 
 self.addEventListener('message', async (e) => {
   const { fileContent, fileType, scanLevel } = e.data;
 
   try {
     const parser = ParserFactory.getParser(fileType);
-    const parsedData = parser.parse(fileContent);
+    const rawParsedData = parser.parse(fileContent);
+    
+    // Zod Schema Validation
+    const parsedData = nmapDataSchema.parse(rawParsedData);
     
     if (!parsedData.hosts || parsedData.hosts.length === 0) {
       throw new Error('No active hosts or open ports discovered in Nmap logs.');
@@ -51,6 +55,11 @@ self.addEventListener('message', async (e) => {
 
     self.postMessage({ success: true, scanResult });
   } catch (error) {
-    self.postMessage({ success: false, error: error.message });
+    let errorMessage = error.message;
+    if (error.name === 'ZodError') {
+      const issues = JSON.parse(error.message);
+      errorMessage = "Data Validation Failed: " + issues.map(i => `${i.path.join('.')}: ${i.message}`).join(", ");
+    }
+    self.postMessage({ success: false, error: errorMessage });
   }
 });

@@ -21,6 +21,8 @@ export const useExposureStore = create((set, get) => {
     scanResult: initialScanResult,
     loading: false,
     error: null,
+    
+    setError: (errorMsg) => set({ error: errorMsg, loading: false }),
 
     handleSetStoragePermission: (status) => {
       set({ storagePermission: status });
