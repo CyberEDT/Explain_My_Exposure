@@ -13,17 +13,8 @@ import HostDashboardLive from '../components/dashboard/HostDashboardLive';
 import { 
   Shield, 
   Terminal, 
-  Search, 
   Download, 
-  Copy, 
-  FileText, 
-  Check, 
-  ArrowRight,
-  Database,
-  Lock,
-  Cpu,
-  AlertTriangle,
-  FileCode
+  ArrowRight
 } from 'lucide-react';
 
 import { MOCK_PRELOADED_DATA } from '../constants/mockData';
@@ -62,17 +53,17 @@ export default function DashboardPage() {
 
   // Local state managers
   const [activeHostIdx, setActiveHostIdx] = useState(0);
-  const [activeReportSection, setActiveReportSection] = useState('04 Attack Paths');
   const [activeTab, setActiveTab] = useState('REPORT');
   const [copied, setCopied] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [scanLevel, setScanLevel] = useState('low');
-  const [analystPrompt, setAnalystPrompt] = useState('Explain why exposing SMB(445) on a DC is critical.');
 
   // Reset host index when scanResult changes
-  useEffect(() => {
+  const [prevScanResult, setPrevScanResult] = useState(scanResult);
+  if (scanResult !== prevScanResult) {
+    setPrevScanResult(scanResult);
     setActiveHostIdx(0);
-  }, [scanResult]);
+  }
 
   // Auto-clean the scan results when navigating away from the dashboard
   useEffect(() => {

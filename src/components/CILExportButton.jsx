@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { publishExposureIntelligence, CILNavigator } from '../services/cilPublisher';
-import { Share2, ExternalLink, Shield, Eye, Target } from 'lucide-react';
+import { publishExposureIntelligence } from '../services/cil/publishExposure';
+import { CILNavigator } from '../integrations/cil';
+import { Share2, ExternalLink, Shield, Eye, Target, AlertCircle } from 'lucide-react';
 
 /**
  * CILExportButton — EME Theme
@@ -8,14 +9,24 @@ import { Share2, ExternalLink, Shield, Eye, Target } from 'lucide-react';
 export default function CILExportButton({ scanResult }) {
   const [sessionId, setSessionId] = useState(null);
   const [published, setPublished] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
 
-  const handlePublish = () => {
-    const id = publishExposureIntelligence(scanResult);
-    setSessionId(id);
-    setPublished(true);
+  // Read configurations
+  const cilEnabled = import.meta.env?.VITE_CIL_ENABLED !== 'false';
+  const ethUrl = import.meta.env?.VITE_ETH_URL;
+  const etdUrl = import.meta.env?.VITE_ETD_URL;
+
+  if (!cilEnabled || !scanResult) return null;
+
+  const handlePublish = async () => {
+    setIsPublishing(true);
+    const id = await publishExposureIntelligence(scanResult);
+    if (id) {
+      setSessionId(id);
+      setPublished(true);
+    }
+    setIsPublishing(false);
   };
-
-  if (!scanResult) return null;
 
   return (
     <div className="border border-border bg-card p-4">
@@ -46,27 +57,46 @@ export default function CILExportButton({ scanResult }) {
           {!published ? (
             <button
               onClick={handlePublish}
-              className="flex items-center gap-2 px-4 py-1.5 text-xs font-bold uppercase tracking-widest bg-gold text-black hover:bg-transparent hover:text-gold border border-gold transition-colors"
+              disabled={isPublishing}
+              className={`flex items-center gap-2 px-4 py-1.5 text-xs font-bold uppercase tracking-widest border transition-colors ${
+                isPublishing 
+                  ? 'bg-transparent text-muted-foreground border-border cursor-not-allowed'
+                  : 'bg-gold text-black hover:bg-transparent hover:text-gold border-gold'
+              }`}
             >
-              <Share2 size={14} /> PUBLISH_INTELLIGENCE
+              <Share2 size={14} /> {isPublishing ? 'PUBLISHING...' : 'PUBLISH_INTELLIGENCE'}
             </button>
           ) : (
             <>
-              <button
-                onClick={() => CILNavigator.openInETH(sessionId)}
-                className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-widest border border-danger/40 text-danger hover:bg-danger/10 transition-colors"
-              >
-                <Target size={12} /> ANALYZE_IN_ETH
-              </button>
-              <button
-                onClick={() => CILNavigator.openInETD(sessionId)}
-                className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-widest border transition-colors"
-                style={{ borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.1)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-              >
-                <Shield size={12} /> OPEN_IN_ETD
-              </button>
+              {ethUrl ? (
+                <button
+                  onClick={() => CILNavigator.openInETH(sessionId)}
+                  className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-widest border border-danger/40 text-danger hover:bg-danger/10 transition-colors"
+                >
+                  <Target size={12} /> ANALYZE_IN_ETH
+                </button>
+              ) : (
+                <span className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-widest border border-border text-muted-foreground bg-black/40" title="ETH Integration Unavailable">
+                  <AlertCircle size={12} /> ETH_UNAVAILABLE
+                </span>
+              )}
+
+              {etdUrl ? (
+                <button
+                  onClick={() => CILNavigator.openInETD(sessionId)}
+                  className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-widest border transition-colors"
+                  style={{ borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.1)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                >
+                  <Shield size={12} /> OPEN_IN_ETD
+                </button>
+              ) : (
+                <span className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-widest border border-border text-muted-foreground bg-black/40" title="ETD Integration Unavailable">
+                  <AlertCircle size={12} /> ETD_UNAVAILABLE
+                </span>
+              )}
+
               <div className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-widest border border-border text-muted-foreground">
                 <Share2 size={12} /> {sessionId.slice(-8)}
               </div>

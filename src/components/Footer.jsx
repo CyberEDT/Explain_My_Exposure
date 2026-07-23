@@ -40,6 +40,7 @@ export default function Footer() {
                 <li><Link to="/rules" className="hover:text-foreground transition-colors">// Host Rules</Link></li>
                 <li><Link to="/kb" className="hover:text-foreground transition-colors">// Knowledge Base</Link></li>
                 <li><Link to="/changelog" className="hover:text-foreground transition-colors">// Changelog</Link></li>
+                <li><Link to="/roadmap" className="hover:text-foreground transition-colors">// Roadmap</Link></li>
               </ul>
             </nav>
           </div>

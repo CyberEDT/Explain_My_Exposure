@@ -1,29 +1,31 @@
 import React from 'react';
-import { AreaChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, ComposedChart } from 'recharts';
+import { Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, ComposedChart } from 'recharts';
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-[#111] border border-border p-3">
+        <p className="text-white text-xs font-mono mb-2 uppercase tracking-wider">{payload[0].payload.fullStage}</p>
+        <p className="text-[#00d0ff] text-[10px] font-mono">Likelihood : {Math.round(payload[0].value)}</p>
+        <p className="text-[#00ff88] text-[10px] font-mono mt-1">Confidence : {Math.round(payload[1].value)}</p>
+      </div>
+    );
+  }
+  return null;
+};
 
 export default function ExposureChainTimeline({ data }) {
-  if (!data || data.length === 0) return null;
+  const chartData = React.useMemo(() => {
+    if (!data || data.length === 0) return [];
+    return data.map(d => ({
+      stage: d.stage.substring(0, 8) + (d.stage.length > 8 ? '...' : ''),
+      fullStage: d.stage,
+      likelihood: d.score,
+      confidence: Math.min(100, Math.max(0, d.score + (((d.stage.length * 7) % 20) - 10))) // Adds deterministic variance for visual distinction
+    }));
+  }, [data]);
 
-  // Synthesize Confidence metric based on Score (Likelihood) for the dual-line visual
-  const chartData = data.map(d => ({
-    stage: d.stage.substring(0, 8) + (d.stage.length > 8 ? '...' : ''),
-    fullStage: d.stage,
-    likelihood: d.score,
-    confidence: Math.min(100, Math.max(0, d.score + (Math.random() * 20 - 10))) // Adds +/- 10 variance for visual distinction
-  }));
-
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-[#111] border border-border p-3">
-          <p className="text-white text-xs font-mono mb-2 uppercase tracking-wider">{payload[0].payload.fullStage}</p>
-          <p className="text-[#00d0ff] text-[10px] font-mono">Likelihood : {Math.round(payload[0].value)}</p>
-          <p className="text-[#00ff88] text-[10px] font-mono mt-1">Confidence : {Math.round(payload[1].value)}</p>
-        </div>
-      );
-    }
-    return null;
-  };
+  if (!chartData || chartData.length === 0) return null;
 
   return (
     <div className="w-full flex flex-col border border-border bg-card">

@@ -1,6 +1,29 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
+const colorMap = {
+  'Critical': 'url(#gradCritical)',
+  'High': 'url(#gradHigh)',
+  'Medium': 'url(#gradMedium)',
+  'Low': 'url(#gradLow)'
+};
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="border border-border bg-card p-3 shadow-xl">
+        <p className="text-xs font-bold text-foreground mb-1">{data.name}</p>
+        <p className="text-[11px] text-muted-foreground">Exposed on {data.count} hosts</p>
+        <p className="text-[10px] uppercase tracking-wider mt-2" style={{ color: colorMap[data.interest] }}>
+          {data.interest} Attacker Interest
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function AttackerInterestChart({ hosts }) {
   const portFreq = {};
   
@@ -20,13 +43,6 @@ export default function AttackerInterestChart({ hosts }) {
     return 'Low';
   };
 
-  const colorMap = {
-    'Critical': 'url(#gradCritical)',
-    'High': 'url(#gradHigh)',
-    'Medium': 'url(#gradMedium)',
-    'Low': 'url(#gradLow)'
-  };
-
   const data = Object.values(portFreq)
     .map(d => ({
       ...d,
@@ -35,22 +51,6 @@ export default function AttackerInterestChart({ hosts }) {
     }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 8); // Top 8 exposed ports
-
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="border border-border bg-card p-3 shadow-xl">
-          <p className="text-xs font-bold text-foreground mb-1">{data.name}</p>
-          <p className="text-[11px] text-muted-foreground">Exposed on {data.count} hosts</p>
-          <p className="text-[10px] uppercase tracking-wider mt-2" style={{ color: colorMap[data.interest] }}>
-            {data.interest} Attacker Interest
-          </p>
-        </div>
-      );
-    }
-    return null;
-  };
 
   return (
     <div className="h-72 w-full">

@@ -4,7 +4,7 @@ import { useExposureStore } from '../store/exposureStore';
 import Footer from '../components/Footer';
 import MobileTabBar from '../components/common/MobileTabBar';
 import useDevice from '../hooks/useDevice';
-import { Menu, X, Activity, Cpu, Grid, Shield, Database, FileText, Code } from 'lucide-react';
+import { Menu, X, Activity, Cpu, Grid, Shield, Database, FileText, Code, Network, Map } from 'lucide-react';
 
 const NAV_ITEMS = [
   { path: '/scanner', label: 'ingest', icon: Activity },
@@ -12,7 +12,9 @@ const NAV_ITEMS = [
   { path: '/engine', label: 'engine', icon: Cpu },
   { path: '/mitre', label: 'mitre', icon: Grid },
   { path: '/kb', label: 'knowledge base', icon: Database },
+  { path: '/cil', label: 'cil ecosystem', icon: Network },
   { path: '/report', label: 'report', icon: FileText },
+  { path: '/roadmap', label: 'roadmap', icon: Map },
 ];
 
 export default function MainLayout({ children }) {
@@ -30,14 +32,15 @@ export default function MainLayout({ children }) {
     <div className="relative min-h-screen overflow-x-hidden font-mono bg-background text-foreground selection:bg-gold/30 selection:text-white">
       {/* Sticky Top Header */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
-        <div className="mx-auto flex h-14 max-w-[1600px] items-center justify-between px-6 text-[11px] uppercase tracking-[0.2em]">
-          <Link to="/" className="flex items-center gap-2 font-bold tracking-[0.3em] text-foreground z-50">
+        <div className="mx-auto flex h-14 max-w-[1600px] items-center justify-between px-4 xl:px-6 text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-widest xl:tracking-[0.15em]">
+          <Link to="/" className="flex items-center gap-2 font-bold tracking-widest xl:tracking-[0.25em] text-foreground z-50 shrink-0 mr-4">
             <span className="inline-block h-2 w-2 bg-gold animate-pulse-dot"></span>
-            EME_/_EXPLAIN_MY_EXPOSURE
+            <span className="hidden sm:inline">EME_/_EXPLAIN_MY_EXPOSURE</span>
+            <span className="sm:hidden">EME_/</span>
           </Link>
           
           {/* Desktop Navigation */}
-          <nav aria-label="Primary Navigation" className="hidden items-center gap-8 md:flex">
+          <nav aria-label="Primary Navigation" className="hidden items-center gap-3 lg:gap-5 xl:gap-7 md:flex whitespace-nowrap">
             {isLandingPage ? (
               <Link to="/scanner" className="text-muted-foreground hover:text-gold transition-colors flex items-center gap-1.5">
                 <Activity size={12} />
@@ -61,10 +64,10 @@ export default function MainLayout({ children }) {
                 })}
               </>
             )}
-            <a href="http://www.cyberedt.com" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-gold/80 transition-colors font-bold ml-4 border-l border-border pl-6">
+            <a href="http://www.cyberedt.com" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-gold/80 transition-colors font-bold ml-2 xl:ml-4 border-l border-border pl-4 xl:pl-6">
               CYBEREDT
             </a>
-            <a href="https://github.com/CyberEDT/Explain_My_Exposure" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-gold transition-colors ml-4" title="View Source on GitHub">
+            <a href="https://github.com/CyberEDT/Explain_My_Exposure" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-gold transition-colors ml-2 xl:ml-4" title="View Source on GitHub">
               <Code size={14} />
             </a>
           </nav>

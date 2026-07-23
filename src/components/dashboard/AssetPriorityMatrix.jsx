@@ -1,6 +1,22 @@
 import React from 'react';
 import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="border border-border bg-card p-3 shadow-xl max-w-[200px]">
+        <p className="text-xs font-bold text-foreground mb-1">{data.ip}</p>
+        <p className="text-[10px] text-gold uppercase tracking-wider mb-2">{data.type}</p>
+        <p className="text-[11px] text-muted-foreground">Confidence: {data.confidence}%</p>
+        <p className="text-[11px] text-muted-foreground">Value: {data.valueLabel}</p>
+        <p className="text-[11px] text-muted-foreground">Exposed Services: {data.surface / 20}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function AssetPriorityMatrix({ hosts }) {
   const valueMap = { 'Low': 1, 'Medium': 2, 'High': 3, 'Critical': 4 };
   const labelMap = { 1: 'Low', 2: 'Medium', 3: 'High', 4: 'Critical' };
@@ -13,22 +29,6 @@ export default function AssetPriorityMatrix({ hosts }) {
     surface: Math.max(1, (h.ports?.length || 0) * 20),
     type: h.intelligence?.asset_type || 'Unknown'
   }));
-
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="border border-border bg-card p-3 shadow-xl max-w-[200px]">
-          <p className="text-xs font-bold text-foreground mb-1">{data.ip}</p>
-          <p className="text-[10px] text-gold uppercase tracking-wider mb-2">{data.type}</p>
-          <p className="text-[11px] text-muted-foreground">Confidence: {data.confidence}%</p>
-          <p className="text-[11px] text-muted-foreground">Value: {data.valueLabel}</p>
-          <p className="text-[11px] text-muted-foreground">Exposed Services: {data.surface / 20}</p>
-        </div>
-      );
-    }
-    return null;
-  };
 
   return (
     <div className="h-72 w-full">

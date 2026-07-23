@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import SeoMeta from '../components/seo/SeoMeta';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Terminal, ArrowRight, GitCommit, ChevronRight, CheckCircle2, Clock, Map, BookOpen, Settings } from 'lucide-react';
+import { ArrowRight, GitCommit, CheckCircle2, Clock, Map, BookOpen, Settings, Star } from 'lucide-react';
 
 export default function ChangelogPage() {
   useEffect(() => {
@@ -149,9 +149,8 @@ export default function ChangelogPage() {
 
                          {/* Updates */}
                          <div className="space-y-4 text-left">
-                           {release.updates.map((update, uIdx) => {
-                             const Icon = update.icon;
-                             return (
+                            {release.updates.map((update, uIdx) => {
+                              return (
                                <div key={uIdx} className="flex items-start gap-4">
                                  <div className={`shrink-0 mt-1 px-2 py-0.5 border flex items-center gap-1 text-[9px] uppercase tracking-widest font-bold ${update.color} ${update.bg} border-current w-24 justify-center`}>
                                    {update.type}
@@ -173,59 +172,23 @@ export default function ChangelogPage() {
                    </motion.div>
                  );
                })}
-            </div>
-
-            {/* 3. The Interactive Roadmap */}
+            {/* 3. Link to Full Roadmap */}
             <motion.div 
                initial={{ opacity: 0 }}
                whileInView={{ opacity: 1 }}
                viewport={{ once: true }}
-               className="relative mt-32 pt-20"
+               className="relative mt-32 pt-20 border-t border-border/50 text-center"
             >
-               {/* Dashed Line transitioning to future */}
-               <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-transparent border-l border-dashed border-gold/50 md:-translate-x-1/2 pointer-events-none"></div>
-
-               <div className="text-center mb-16 relative z-10">
-                 <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black border-4 border-gold/50 mb-6 shadow-[0_0_20px_rgba(255,191,0,0.3)] animate-pulse"></div>
-                 <h2 className="font-display text-4xl font-bold uppercase tracking-widest text-foreground">The Future Roadmap</h2>
-                 <p className="text-gold mt-2 font-mono text-sm uppercase tracking-widest">// v1.X & Beyond</p>
-               </div>
-
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto relative z-10">
-                 {/* In Progress */}
-                 <div className="bg-[#0a0a0c] border border-gold/30 p-8 flex flex-col items-center text-center">
-                   <div className="text-[10px] uppercase tracking-widest text-gold mb-4 border border-gold px-3 py-1 flex items-center gap-2">
-                     <span className="w-2 h-2 bg-gold animate-pulse-dot rounded-full"></span> IN PROGRESS
-                   </div>
-                   <h3 className="text-lg font-bold text-foreground mb-4">APES v2 Scoring</h3>
-                   <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                     Refining the Attacker Preference Exposure Score to heavily penalize specific combinations of unencrypted protocols crossing network boundaries.
-                   </p>
-                 </div>
-
-                 {/* Planned */}
-                 <div className="bg-[#050505] border border-border p-8 flex flex-col items-center text-center opacity-75 hover:opacity-100 transition-opacity">
-                   <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 border border-border px-3 py-1 flex items-center gap-2">
-                     <GitCommit className="w-3 h-3" /> PLANNED
-                   </div>
-                   <h3 className="text-lg font-bold text-foreground mb-4">Rule Explorer Expansion</h3>
-                   <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                     Adding 50+ new heuristic signatures for OT (Operational Technology) and IoT devices commonly found in corporate environments.
-                   </p>
-                 </div>
-
-                 {/* Planned */}
-                 <div className="bg-[#050505] border border-border p-8 flex flex-col items-center text-center opacity-75 hover:opacity-100 transition-opacity">
-                   <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 border border-border px-3 py-1 flex items-center gap-2">
-                     <GitCommit className="w-3 h-3" /> PLANNED
-                   </div>
-                   <h3 className="text-lg font-bold text-foreground mb-4">Report Export</h3>
-                   <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                     Automated PDF and JSON export functionality for the Intelligence Dossiers, allowing easy sharing with leadership and ingestion into SIEMs.
-                   </p>
-                 </div>
-               </div>
-
+               <h2 className="font-display text-3xl font-bold uppercase tracking-widest text-foreground mb-6">Looking Ahead</h2>
+               <p className="text-muted-foreground font-mono max-w-2xl mx-auto mb-8">
+                 Curious what comes next? View our comprehensive product roadmap detailing the path toward full CIL integration and enterprise features.
+               </p>
+               <Link 
+                 to="/roadmap" 
+                 className="inline-flex items-center gap-3 border border-gold/50 text-gold hover:bg-gold hover:text-black px-8 py-3 font-bold uppercase tracking-[0.2em] transition-all"
+               >
+                 VIEW PRODUCT ROADMAP <ArrowRight className="w-4 h-4" />
+               </Link>
             </motion.div>
 
          </div>

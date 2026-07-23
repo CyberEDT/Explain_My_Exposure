@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import SeoMeta from '../components/seo/SeoMeta';
-import { motion } from 'framer-motion';
-import { Activity, Clock, CheckCircle2, AlertTriangle, AlertCircle, Info, Settings, Server, Map, BookOpen, LineChart as LineChartIcon, FileText, Database, Network } from 'lucide-react';
+import { Activity, Clock, AlertCircle, Info } from 'lucide-react';
 import { BarChart, Bar, Cell, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 
 export default function StatusPage() {
@@ -10,22 +9,25 @@ export default function StatusPage() {
   }, []);
 
   // 90-day mock data (all 100 except a couple of days)
-  const uptimeData = Array.from({ length: 90 }).map((_, i) => {
-    let uptime = 100;
-    if (i === 75) uptime = 98; // Minor outage
-    if (i === 40) uptime = 99.5; // Maintenance
-    
-    let color = '#22c55e'; // success
-    if (uptime < 99) color = '#eab308'; // warning
-    if (uptime < 95) color = '#ef4444'; // danger
-    
-    return {
-      day: 90 - i,
-      uptime,
-      color,
-      date: new Date(Date.now() - (90 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-    };
-  });
+  const uptimeData = React.useMemo(() => {
+    const now = 1720828800000; // Static date to maintain pure function component constraints
+    return Array.from({ length: 90 }).map((_, i) => {
+      let uptime = 100;
+      if (i === 75) uptime = 98; // Minor outage
+      if (i === 40) uptime = 99.5; // Maintenance
+      
+      let color = '#22c55e'; // success
+      if (uptime < 99) color = '#eab308'; // warning
+      if (uptime < 95) color = '#ef4444'; // danger
+      
+      return {
+        day: 90 - i,
+        uptime,
+        color,
+        date: new Date(now - (90 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+      };
+    });
+  }, []);
 
   // Sparkline data
   const sparklineData = [

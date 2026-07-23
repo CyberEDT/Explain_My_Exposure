@@ -43,7 +43,7 @@ export const CILStore = {
 };
 
 let _channel = null;
-try { if (typeof BroadcastChannel !== 'undefined') _channel = new BroadcastChannel('cyberedt-cil'); } catch {}
+try { if (typeof BroadcastChannel !== 'undefined') _channel = new BroadcastChannel('cyberedt-cil'); } catch { /* ignore if not supported */ }
 export const CILBus = {
   emit(event) { _channel?.postMessage(event); },
   on(handler) {

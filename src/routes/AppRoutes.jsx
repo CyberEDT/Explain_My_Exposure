@@ -13,7 +13,9 @@ const ReportPage = lazy(() => import('../pages/ReportPage'));
 const RulesPage = lazy(() => import('../pages/RulesPage'));
 const KnowledgeBasePage = lazy(() => import('../pages/KnowledgeBasePage'));
 const ChangelogPage = lazy(() => import('../pages/ChangelogPage'));
+const RoadmapPage = lazy(() => import('../pages/RoadmapPage'));
 const StatusPage = lazy(() => import('../pages/StatusPage'));
+const CILPage = lazy(() => import('../pages/CILPage'));
 
 // A simple fallback component while chunk is loading
 const PageLoader = () => (
@@ -59,8 +61,14 @@ export default function AppRoutes() {
       {/* Changelog Docs */}
       <Route path="/changelog" element={<MainLayout><ChangelogPage /></MainLayout>} />
       
+      {/* Roadmap Docs */}
+      <Route path="/roadmap" element={<MainLayout><RoadmapPage /></MainLayout>} />
+      
       {/* Status Page */}
       <Route path="/status" element={<MainLayout><StatusPage /></MainLayout>} />
+      
+      {/* CIL Ecosystem Page */}
+      <Route path="/cil" element={<MainLayout><CILPage /></MainLayout>} />
       
       {/* Fallbacks / Legacy Route Redirects */}
       <Route path="/upload" element={<Navigate to="/scanner#upload" replace />} />

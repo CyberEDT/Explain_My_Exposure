@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import ExposureRadar from './ExposureRadar';
 
 export default function HostDashboardLive({ host, activeResult, activeHostIdx, setActiveHostIdx, totalHosts }) {
-  if (!host) return null;
-
   // Keyboard Navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -18,6 +16,8 @@ export default function HostDashboardLive({ host, activeResult, activeHostIdx, s
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [totalHosts, setActiveHostIdx]);
+
+  if (!host) return null;
 
   // Extract necessary data
   const ip = host.ip || 'UNKNOWN';

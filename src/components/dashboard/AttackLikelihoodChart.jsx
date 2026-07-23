@@ -1,21 +1,20 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-[#111] border border-border p-3">
+        <p className="text-white text-xs font-mono mb-1 uppercase tracking-wider">{label}</p>
+        <p className="text-gold text-xs font-mono">Likelihood : {payload[0].value}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function AttackLikelihoodChart({ data }) {
   if (!data || data.length === 0) return null;
-
-  // Custom Tooltip matching the dark theme
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-[#111] border border-border p-3">
-          <p className="text-white text-xs font-mono mb-1 uppercase tracking-wider">{label}</p>
-          <p className="text-gold text-xs font-mono">Likelihood : {payload[0].value}</p>
-        </div>
-      );
-    }
-    return null;
-  };
 
   return (
     <div className="w-full flex flex-col border border-border bg-card">

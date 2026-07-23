@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 // Entrypoint for scan analysis (POST /api/analyze)
 import ParserFactory from '../../lib/engines/parser/index.js';
 import { calculateScore } from '../../lib/engines/scoring/calculator.js';

@@ -1,6 +1,18 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="border border-border bg-card p-3 shadow-xl">
+        <p className="text-[10px] uppercase tracking-[0.2em] text-gold mb-1">{label}</p>
+        <p className="text-xs text-muted-foreground">{`Success Probability: ${payload[0].value}%`}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function ExposureChainPipeline({ hosts }) {
   // Calculate funnel probabilities based on hosts data
   // DISCOVER -> ENUMERATE -> ACCESS -> ABUSE -> MOVE -> IMPACT
@@ -20,18 +32,6 @@ export default function ExposureChainPipeline({ hosts }) {
     { stage: 'MOVE', probability: Math.min(100, Math.round((withMove/total)*100)) },
     { stage: 'IMPACT', probability: impactNodes > 0 ? 90 : Math.min(100, Math.round((withMove/total)*50)) }
   ];
-
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="border border-border bg-card p-3 shadow-xl">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-gold mb-1">{label}</p>
-          <p className="text-xs text-muted-foreground">{`Success Probability: ${payload[0].value}%`}</p>
-        </div>
-      );
-    }
-    return null;
-  };
 
   return (
     <div className="h-64 w-full">
