@@ -172,6 +172,7 @@ export default function ChangelogPage() {
                    </motion.div>
                  );
                })}
+            </div>
             {/* 3. Link to Full Roadmap */}
             <motion.div 
                initial={{ opacity: 0 }}
